@@ -3,7 +3,7 @@
 `ri.vim` lets you search and navigate Ruby library and gem documentation inside
 Vim.
 
-[screenshots]
+![screenshot](https://github.com/danchoi/ri_vim/raw/master/screens/ri_vim5.png)
 
 Advantages over the venerable `ri` command-line tool:
 

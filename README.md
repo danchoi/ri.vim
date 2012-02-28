@@ -206,8 +206,6 @@ this to your `.vimrc`:
     nnoremap  ,RI :call ri#OpenSearchPrompt(1)<cr> " vertical split
     nnoremap  ,RK :call ri#LookupNameUnderCursor()<cr> " keyword lookup 
 
-
-
 ## Acknowledgements
 
 Special thanks to Eric Hodel for developing and maintaining the whole ri and
@@ -219,7 +217,7 @@ that very useful codebase.
 
 Please submit them here:
 
-* <https://github.com/danchoi/ri_vim/issues>
+* <https://github.com/danchoi/ri.vim/issues>
 
 
 ## About the developer

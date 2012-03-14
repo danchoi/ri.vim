@@ -2,7 +2,7 @@
 # Modified by Daniel Choi <dhchoi@gmail.com>
 # Modified the RDocRI::Driver class from the original RDoc gem for rdoc_vim gem
 
-gem 'rdoc', '= 3.8'
+gem 'rdoc', '~> 3.8'
 require 'abbrev'
 require 'optparse'
 begin

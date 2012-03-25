@@ -24,7 +24,10 @@ function! s:runCommand(command)
 endfunction
 
 function! RIVimStatusLine()
-  let a = g:mapleader
+  let a = "\\"
+  if exists("g:mapleader")
+    let a = g:mapleader
+  endif
   return "%<%f\ | Press ".a."? for help "."%r%=%-14.(%l,%c%V%)\ %P"
 endfunction
 

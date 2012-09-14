@@ -279,9 +279,7 @@ class RIVim
   # Outputs formatted RI data for the class or method +name+.
   def display_name name
     return true if display_class name
-    if name =~ /::|#|\./
-      display_method name 
-    end
+    display_method name
     true
   end
 

@@ -155,7 +155,7 @@ your Ruby built-in library, standard library, and your installed Ruby gems.
 Please consult other reference sources for instructions specific to your
 particular setup.
 
-But I'll try to cover some common cases:
+I'll try to cover some common cases:
 
 If you use RVM, run this to install ri documentation for the built-in and
 standard library of your active Ruby installation:
@@ -165,33 +165,14 @@ standard library of your active Ruby installation:
 You can check if this worked by running a command like `ri Enumerable` or `ri
 IO` on the command line. 
 
-You may run into the following an error when you run this rvm command:
+To generate ri documentation for your gems, use these commands:
 
-    uh-oh! RDoc had a problem:
-    invalid option: --ri-site generator already set to ri
+    # for global gems
+    gem list | tr -d '(,)' | awk '{print $1, "--version", $2}' | xargs -n3 gem rdoc --ri --no-rdoc
 
-If you see this, my solution (I'm not 100% sure this is the best way) was to
-patch the `~/.rvm/scripts/docs` script.  Find the `generate_ri()` function and
-replace this line:
+    # for bundled gems
+    bundle list | tr -d '*(,)' | awk '{print $1, "--version", $2}' | xargs -n3 gem rdoc --ri --no-rdoc
 
-    rdoc -a --ri --ri-site > /dev/null 2>> ${rvm_log_path}/$rvm_docs_ruby_string/docs.log
-
-with:
-
-    rdoc -a --ri 
-
-This should let you run `rvm docs generate-ri` successfully. 
-
-To generate ri documentation for your gems, reinstall the ones currently
-without ri documentation with the following command
-
-    gem install [gemname] --ri
-
-and then check to see if this worked by using ri to look up a class or module
-in that gem; e.g.,
-
-    ri ActiveRecord::Associations::ClassMethods
-    
 If you like using `ri.vim`, you may want to make to remove `--no-ri` if you
 added that to your `.gemrc`. This will make sure that the `gem install` command
 automatically generates ri documentation.
@@ -212,7 +193,8 @@ Special thanks to Eric Hodel for developing and maintaining the whole ri and
 rdoc infrastructure that ri.vim builds on. ri.vim adds just a little piece to
 that very useful codebase.
 
-
+Thank you to [Suraj Kurapati](https://github.com/sunaku) for the tip on
+how to generate ri documention for installed gems.
 ## Bug reports and feature requests
 
 Please submit them here:

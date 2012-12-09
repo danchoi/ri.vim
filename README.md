@@ -106,7 +106,7 @@ page (including the class and instance methods at the bottom) and press `ENTER`
 to jump to the documentation.
 
 You can also find a method on any class or module you're looking at the
-documentation for by pressing `,rr`. This brings up the class/module method
+documentation for by pressing `,,r`. This brings up the class/module method
 autocompletion window:
 
 ![screenshot](https://github.com/danchoi/ri_vim/raw/master/screens/class_method_autocomplete.png)
@@ -121,7 +121,7 @@ Let's look at `#encode`:
 ![screenshot](https://github.com/danchoi/ri_vim/raw/master/screens/class_instance_method.png)
 
 When you are looking at the documentation for an instance or class method, you
-can still use `,rr` to browse and jump to other methods on that same class or
+can still use `,,r` to browse and jump to other methods on that same class or
 module. 
 
 You can also use `-` to jump up the hierarchy to the page for the `String`

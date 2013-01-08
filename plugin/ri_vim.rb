@@ -460,7 +460,6 @@ class RIVim
     return if found.empty?
     includes.reject! do |modules,| modules.empty? end
     found.each do |store, klass|
-      comment = klass.comment
       class_methods    = store.class_methods[klass.full_name]
       instance_methods = store.instance_methods[klass.full_name]
       add_to_method_dropdown name, store, class_methods,    'Class methods'
@@ -575,7 +574,7 @@ class RIVim
   end
 
   def gemdir(gem)
-    gemdir = ENV["GEM_HOME"] + "/gems/#{gem}"
+    ENV["GEM_HOME"] + "/gems/#{gem}"
   end
 
   # TODO

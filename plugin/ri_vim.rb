@@ -43,9 +43,9 @@ class RIVim
     @list = options[:list]
     @doc_dirs = []
     @stores   = []
-    RDoc::RI::Paths.each(options[:use_system], 
+    RDoc::RI::Paths.each(options[:use_system],
                          options[:use_site],
-                         options[:use_home], 
+                         options[:use_home],
                          options[:use_gems],
                          *options[:extra_doc_dirs]) do |path, type|
       @doc_dirs << path
@@ -233,11 +233,11 @@ class RIVim
         end)
         out << list
       end
-      add_method_list(out, 
-        (class_methods || []).map {|x| ".#{x}"},    
+      add_method_list(out,
+        (class_methods || []).map {|x| ".#{x}"},
         'Class methods')
-      add_method_list(out, 
-                      (instance_methods || []).map {|x| "#{x}"}, 
+      add_method_list(out,
+                      (instance_methods || []).map {|x| "#{x}"},
                       'Instance methods')
       add_method_list out, attributes,       'Attributes'
       out << RDoc::Markup::BlankLine.new
@@ -292,7 +292,7 @@ class RIVim
       #matches = xs.map {|x| "%-#{longest_method.size}s %s%s" % [x[0], x[1], x[2]] }
     end
     if matches.empty?
-      #matches = classes.keys.grep(/^#{name}/) 
+      #matches = classes.keys.grep(/^#{name}/)
       matches = classes.select {|k, v| k =~ /^#{name}/ }.
         map {|k, v|
           store = v.first
@@ -477,7 +477,7 @@ class RIVim
         else
           bmethod = "##{method}"
         end
-        method_obj = store.load_method classname, bmethod 
+        method_obj = store.load_method classname, bmethod
         bsize = method_obj.comment.parts.size
         if bsize > 0
           size = " (#{bsize})"
@@ -554,7 +554,7 @@ class RIVim
   def parse_name(name)
     parts = name.split(/(::|#|\.)/)
     if parts.length == 1 then
-      # Daniel Choi fixed this line from the official rdoc 
+      # Daniel Choi fixed this line from the official rdoc
       if parts.first =~ /^[a-z=<|^&*-+\/\[]/ then
         type = '.'
         meth = parts.pop
@@ -602,7 +602,7 @@ class RIVim
       else
         ri.display_matches ARGV.first
       end
-    rescue NotFoundError 
+    rescue NotFoundError
       puts ""
     end
   end

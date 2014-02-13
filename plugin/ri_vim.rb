@@ -195,7 +195,7 @@ class RIVim
         klasses  << klass
         includes << [klass.includes, store] if klass.includes
         [store, klass]
-      rescue Errno::ENOENT
+      rescue Errno::ENOENT, RDoc::Store::MissingFileError
       end
     end.compact
     return if found.empty?

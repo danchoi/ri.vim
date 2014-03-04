@@ -23,13 +23,7 @@ function! s:runCommand(command)
   return res
 endfunction
 
-function! RIVimStatusLine()
-  let a = "\\"
-  if exists("g:mapleader")
-    let a = g:mapleader
-  endif
-  return "%<%f\ | Press ".a."? for help "."%r%=%-14.(%l,%c%V%)\ %P"
-endfunction
+
 
 " parses the first line of the doc
 " e.g. ^= ActiveRecord::Base
@@ -111,8 +105,7 @@ function! s:prepareDocBuffer()
 
   " noremap <buffer> q :call <SID>closeRIVim()<cr>
   noremap <buffer> <Leader>q :call <SID>closeRIVim()<cr>
-  noremap <buffer> <Leader>? :call <SID>help()<CR>
-  setlocal statusline=%!RIVimStatusLine()
+  setlocal statusline="%<%f\ %r%=%-14.(%l,%c%V%)\ %P"
 
   let s:browser_bufnr = bufnr('%')
   call s:syntaxLoad()
@@ -352,12 +345,6 @@ endfunction
 function! s:updateBrowserBufNrAndLoadSyntax()
   let s:browser_bufnr = bufnr('%')
   call s:syntaxLoad()
-endfunction
-
-function! s:help()
-  " This just displays the README
-  let res = system("ri_vim_help") 
-  echo res  
 endfunction
 
 

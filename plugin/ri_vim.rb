@@ -43,9 +43,9 @@ class RIVim
     @list = options[:list]
     @doc_dirs = []
     @stores   = []
-    RDoc::RI::Paths.each(options[:use_system],
+    RDoc::RI::Paths.each(options[:use_system], 
                          options[:use_site],
-                         options[:use_home],
+                         options[:use_home], 
                          options[:use_gems],
                          *options[:extra_doc_dirs]) do |path, type|
       if File.exists?(path)
@@ -195,7 +195,7 @@ class RIVim
         klasses  << klass
         includes << [klass.includes, store] if klass.includes
         [store, klass]
-      rescue Errno::ENOENT, RDoc::Store::MissingFileError
+      rescue # Errno::ENOENT
       end
     end.compact
     return if found.empty?
@@ -235,11 +235,11 @@ class RIVim
         end)
         out << list
       end
-      add_method_list(out,
-        (class_methods || []).map {|x| ".#{x}"},
+      add_method_list(out, 
+        (class_methods || []).map {|x| ".#{x}"},    
         'Class methods')
-      add_method_list(out,
-                      (instance_methods || []).map {|x| "#{x}"},
+      add_method_list(out, 
+                      (instance_methods || []).map {|x| "#{x}"}, 
                       'Instance methods')
       add_method_list out, attributes,       'Attributes'
       out << RDoc::Markup::BlankLine.new
@@ -281,7 +281,9 @@ class RIVim
   # Outputs formatted RI data for the class or method +name+.
   def display_name name
     return true if display_class name
-    display_method name
+    #if name =~ /::|#|\./
+      display_method name 
+    #end
     true
   end
 
@@ -293,9 +295,9 @@ class RIVim
       #longest_method = xs.inject("") {|memo, x| x[0].size > memo.size ? x[0] : memo }
       #matches = xs.map {|x| "%-#{longest_method.size}s %s%s" % [x[0], x[1], x[2]] }
     end
-    if matches.empty?
-      #matches = classes.keys.grep(/^#{name}/)
-      matches = classes.select {|k, v| k =~ /^#{name}/ }.
+    #if matches.empty?
+      #matches = classes.keys.grep(/^#{name}/) 
+    matches = matches.concat classes.select {|k, v| k =~ /^#{name}/ }.
         map {|k, v|
           store = v.first
           klass = store.load_class k
@@ -307,7 +309,7 @@ class RIVim
             k.to_s
           end
         }
-    end
+    #end
     puts matches.sort.join("\n")
   end
 
@@ -456,12 +458,13 @@ class RIVim
         klasses  << klass
         includes << [klass.includes, store] if klass.includes
         [store, klass]
-      rescue Errno::ENOENT
+      rescue #Errno::ENOENT <-just eat this one?
       end
     end.compact
     return if found.empty?
     includes.reject! do |modules,| modules.empty? end
     found.each do |store, klass|
+      comment = klass.comment
       class_methods    = store.class_methods[klass.full_name]
       instance_methods = store.instance_methods[klass.full_name]
       add_to_method_dropdown name, store, class_methods,    'Class methods'
@@ -479,12 +482,12 @@ class RIVim
         else
           bmethod = "##{method}"
         end
-        method_obj = store.load_method classname, bmethod
+        method_obj = store.load_method classname, bmethod 
         bsize = method_obj.comment.parts.size
         if bsize > 0
           size = " (#{bsize})"
         end
-      rescue Errno::ENOENT
+      rescue #Errno::ENOENT
         puts $!
       end
       if name == 'Class methods'
@@ -556,7 +559,7 @@ class RIVim
   def parse_name(name)
     parts = name.split(/(::|#|\.)/)
     if parts.length == 1 then
-      # Daniel Choi fixed this line from the official rdoc
+      # Daniel Choi fixed this line from the official rdoc 
       if parts.first =~ /^[a-z=<|^&*-+\/\[]/ then
         type = '.'
         meth = parts.pop
@@ -604,7 +607,7 @@ class RIVim
       else
         ri.display_matches ARGV.first
       end
-    rescue NotFoundError
+    rescue NotFoundError 
       puts ""
     end
   end

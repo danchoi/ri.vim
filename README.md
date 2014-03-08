@@ -187,11 +187,15 @@ this to your `.vimrc`:
     nnoremap  ,RI :call ri#OpenSearchPrompt(1)<cr> " vertical split
     nnoremap  ,RK :call ri#LookupNameUnderCursor()<cr> " keyword lookup 
 
+## Maintainers
+
+* Matthias Günther [matthias-guenther](https://github.com/matthias-guenther)
+* Daniel Choi [danchoi](https://github.com/danchoi)
+
 ## Acknowledgements
 
-Special thanks to Eric Hodel for developing and maintaining the whole ri and
-rdoc infrastructure that ri.vim builds on. ri.vim adds just a little piece to
-that very useful codebase.
+Thanks to Eric Hodel for developing the ri and rdoc infrastructure that ri.vim
+builds on. ri.vim adds just a little piece to that very useful codebase.
 
 Thank you to [Suraj Kurapati](https://github.com/sunaku) for the tip on
 how to generate ri documention for installed gems.

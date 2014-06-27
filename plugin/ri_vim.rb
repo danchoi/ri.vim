@@ -294,19 +294,7 @@ class RIVim
       #longest_method = xs.inject("") {|memo, x| x[0].size > memo.size ? x[0] : memo }
       #matches = xs.map {|x| "%-#{longest_method.size}s %s%s" % [x[0], x[1], x[2]] }
     end
-    matches = matches.concat classes.select {|k, v| k =~ /^#{name}/ }.
-        map {|k, v|
-          store = v.first
-          klass = store.load_class k
-          has_comment = !klass.comment.empty?
-          if has_comment
-            # put indicator of parts size
-            "#{k} (#{klass.comment.parts.size})"
-          else
-            k.to_s
-          end
-        }
-    #end
+    matches = matches.concat classes.select {|k, v| k =~ /^#{name}/ }.map {|k, v| k.to_s }
     puts matches.sort.join("\n")
   end
 
@@ -595,7 +583,6 @@ class RIVim
         ri.open_readme gem
       elsif ARGV.first == '-d' # exact match
         ri.display_name ARGV[1]
-
       elsif ARGV.first == '-m'  # class methods
         ri.display_class_symbols ARGV[1]
       elsif ARGV.first =~ /^[^A-Z]/

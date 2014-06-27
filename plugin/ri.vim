@@ -18,11 +18,10 @@ func! s:createCacheDir()
 endfunc
 
 function! s:runCommand(command)
-  echom a:command 
+  echom a:command
   let res = system(a:command)
   return res
 endfunction
-
 
 
 " parses the first line of the doc
@@ -30,7 +29,7 @@ endfunction
 " and returns ActiveRecord::Base
 function! s:classname()
   let x = matchstr(getline(1) , '= [A-Z]\S\+')
-  " strip off any method 
+  " strip off any method
   let x = substitute(x, '\(\.\|#\)\S\+$', '', '')
   " string off class method
   let x = substitute(x, '::[^A-Z]\+$', '', '')
@@ -43,23 +42,23 @@ endfunction
 
 function! s:focusBrowserWindow()
   if !exists("s:browser_bufnr")
-    if s:verticalSplit 
-      rightbelow vsplit 
+    if s:verticalSplit
+      rightbelow vsplit
     else
-      rightbelow split 
+      rightbelow split
     endif
     return
   endif
-  if bufwinnr(s:browser_bufnr) == winnr() 
+  if bufwinnr(s:browser_bufnr) == winnr()
     return
   end
-  let winnr = bufwinnr(s:browser_bufnr) 
+  let winnr = bufwinnr(s:browser_bufnr)
   if winnr == -1
     " create window
-    if s:verticalSplit 
-      rightbelow vsplit 
+    if s:verticalSplit
+      rightbelow vsplit
     else
-      rightbelow split 
+      rightbelow split
     endif
   else
     exec winnr . "wincmd w"
@@ -67,7 +66,7 @@ function! s:focusBrowserWindow()
 endfunction
 
 function! ri#OpenSearchPrompt(verticalSplit)
-  let s:verticalSplit = a:verticalSplit 
+  let s:verticalSplit = a:verticalSplit
   let classname = s:classname()
   if classname != ''
     let line = s:selectionPrompt . classname
@@ -172,13 +171,13 @@ function! RubyClassMethodComplete(findstart, base)
     let start = 0
     return start
   else
-    
+
     let res = [] " find tracks matching a:base
     for m in s:classMethods
       " why doesn't case insensitive flag work?
       if m =~ '^\c.\?' . substitute(a:base, '\*', '\\*', '')
         let parts = split(m, '\s\+')
-        if len(parts) > 1 
+        if len(parts) > 1
           call add(res, {'word': parts[0], 'menu': parts[1]})
         else
           call add(res, m)
@@ -186,7 +185,7 @@ function! RubyClassMethodComplete(findstart, base)
       endif
     endfor
     return res
- 
+
   endif
 endfun
 
@@ -311,7 +310,7 @@ function! s:upToParentClass()
   end
 endfunction
 
-let s:gemNamePattern =  '^(from gem \([^)]\+\)'  
+let s:gemNamePattern =  '^(from gem \([^)]\+\)'
 
 function! s:gem()
   let res = search(s:gemNamePattern, 'w')
@@ -355,5 +354,4 @@ au FileType ruby		nnoremap <buffer> K :call ri#LookupNameUnderCursor()<cr>
 call s:createCacheDir()
 
 let g:RIVimLoaded = 1
-
 

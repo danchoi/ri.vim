@@ -43,9 +43,9 @@ class RIVim
     @list = options[:list]
     @doc_dirs = []
     @stores   = []
-    RDoc::RI::Paths.each(options[:use_system], 
+    RDoc::RI::Paths.each(options[:use_system],
                          options[:use_site],
-                         options[:use_home], 
+                         options[:use_home],
                          options[:use_gems],
                          *options[:extra_doc_dirs]) do |path, type|
       if File.exists?(path)
@@ -89,7 +89,6 @@ class RIVim
   # Adds "(from ...)" to +out+ for +store+
   def add_from out, store
     out << RDoc::Markup::Paragraph.new("(from #{store.friendly_path})")
-    #out << RDoc::Markup::Paragraph.new("(from #{store.path})")
   end
 
   # Adds +includes+ to +out+
@@ -235,11 +234,11 @@ class RIVim
         end)
         out << list
       end
-      add_method_list(out, 
-        (class_methods || []).map {|x| ".#{x}"},    
+      add_method_list(out,
+        (class_methods || []).map {|x| ".#{x}"},
         'Class methods')
-      add_method_list(out, 
-                      (instance_methods || []).map {|x| "#{x}"}, 
+      add_method_list(out,
+                      (instance_methods || []).map {|x| "#{x}"},
                       'Instance methods')
       add_method_list out, attributes,       'Attributes'
       out << RDoc::Markup::BlankLine.new
@@ -282,7 +281,7 @@ class RIVim
   def display_name name
     return true if display_class name
     #if name =~ /::|#|\./
-      display_method name 
+      display_method name
     #end
     true
   end
@@ -295,8 +294,6 @@ class RIVim
       #longest_method = xs.inject("") {|memo, x| x[0].size > memo.size ? x[0] : memo }
       #matches = xs.map {|x| "%-#{longest_method.size}s %s%s" % [x[0], x[1], x[2]] }
     end
-    #if matches.empty?
-      #matches = classes.keys.grep(/^#{name}/) 
     matches = matches.concat classes.select {|k, v| k =~ /^#{name}/ }.
         map {|k, v|
           store = v.first
@@ -482,7 +479,7 @@ class RIVim
         else
           bmethod = "##{method}"
         end
-        method_obj = store.load_method classname, bmethod 
+        method_obj = store.load_method classname, bmethod
         bsize = method_obj.comment.parts.size
         if bsize > 0
           size = " (#{bsize})"
@@ -496,7 +493,6 @@ class RIVim
         method = "##{method}#{size}"
       end
       puts method
-      #out << RDoc::Markup::IndentedParagraph.new(2, methods.join(', '))
     end
   end
 
@@ -559,7 +555,7 @@ class RIVim
   def parse_name(name)
     parts = name.split(/(::|#|\.)/)
     if parts.length == 1 then
-      # Daniel Choi fixed this line from the official rdoc 
+      # Daniel Choi fixed this line from the official rdoc
       if parts.first =~ /^[a-z=<|^&*-+\/\[]/ then
         type = '.'
         meth = parts.pop
@@ -607,7 +603,7 @@ class RIVim
       else
         ri.display_matches ARGV.first
       end
-    rescue NotFoundError 
+    rescue NotFoundError
       puts ""
     end
   end

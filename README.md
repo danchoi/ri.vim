@@ -1,44 +1,48 @@
-# ri.vim : ri plugin for Vim
+# ri plugin for Vim
 
-`ri.vim` lets you search and navigate Ruby library and gem documentation inside
+This plugin lets you search and navigate Ruby library and gem documentation inside
 Vim.
+
 
 ![screenshot](https://github.com/danchoi/ri_vim/raw/master/screens/ri_vim5.png)
 
 Advantages over the venerable `ri` command-line tool:
 
-* write code and browse pertinent documentation in adjacent Vim windows
-* search with autocompletion help
-* hyperlinking lets you jump from definition to definition
-* run back and forth through your jump history with CTRL-o and CTRL-i
-* jump directly to gem READMEs and into the gem source directories
-* directly open corresponding HTML-formatted rdoc documentation
+- write code and browse pertinent documentation in adjacent Vim windows
+- search with autocompletion help
+- hyperlinking lets you jump from definition to definition
+- run back and forth through your jump history with CTRL-o and CTRL-i
+- jump directly to gem READMEs and into the gem source directories
+- directly open corresponding HTML-formatted rdoc documentation
 
 
 ## Prerequisites
 
-* Ruby 1.9.2 or higher (but may work with other versions)
-* Vim 7.3 (will not work correctly on 7.2) 
-* rdoc 3.8
+- Ruby 1.9.2 or higher
+- Vim 7.3 (will not work correctly on 7.2)
+- rdoc 3.8 or higher
+
 
 ## Install
 
-Copy the contents of plugin/ into your .vim/plugin directory. 
+Copy the contents of plugin/ into your .vim/plugin directory.
+
 
 ## Commands
 
 For the all the commands below, the mapleader is assumed to be `,`. If it is
 `\` or something else for your setup, use that instead.
 
+
 ### Invoking the plugin
 
-* `,r` opens the search/autocomplete window, and will use a horizontal split to
+- `,r` opens the search/autocomplete window, and will use a horizontal split to
   display matching documentation
-* `,R` opens the search/autocomplete window, and will use a vertical split to
+- `,R` opens the search/autocomplete window, and will use a vertical split to
   display matching documentatoin
-* `,K` opens the search/autocomplete window and prefills it with the keyword
+- `,K` opens the search/autocomplete window and prefills it with the keyword
   under the cursor
-* `K` is automatically remapped to use ri.vim if the current buffer is a *.rb
+- `K` is automatically remapped to use ri.vim if the current buffer is a \*.rb
   file
 
 If these mapping clash or you don't like them, you can override some of them.
@@ -54,13 +58,13 @@ Press `TAB` to start autocompletion.
 
 If you've started typing a name starting with a capital letter, you'll see
 autocompletion suggestions for matching classes and modules. If you're looking
-for a namespace-nested module or class, you can autocomplete the first 
+for a namespace-nested module or class, you can autocomplete the first
 namespace, type `:` and then press `TAB` again to autocomplete the next inner
 namespace.
 
 ![screenshot](https://github.com/danchoi/ri_vim/raw/master/screens/nested_search.png)
 
-If you've started typing a name starting with a lower case letter or 
+If you've started typing a name starting with a lower case letter or
 a symbol that is valid in Ruby method names (i.e., `/^[=*\/&|%^\[<>]/`), ri.vim
 will suggest matching methods from different classes and modules.
 
@@ -69,14 +73,14 @@ will suggest matching methods from different classes and modules.
 Use the standard Vim autocompletion commands to move up and down the match
 list.
 
-* `CTRL-p` and `CTRL-n` let you navigate the drop-down matches. Press `ENTER` to select
+- `CTRL-p` and `CTRL-n` let you navigate the drop-down matches. Press `ENTER` to select
 one.
-* `CTRL-e` closes the match list and lets you continue typing
-* `CTRL-u`: when the match list is active, cycles forward through the match
+- `CTRL-e` closes the match list and lets you continue typing
+- `CTRL-u`: when the match list is active, cycles forward through the match
   list and what you've typed so far; when the match list is inactive, erases
   what you've typed.
-* both `TAB` and `CTRL-x CTRL-u` reactivates autocompletion if it's gone away
-* `CTRL-y` selects the highlighted match without triggering ENTER
+- both `TAB` and `CTRL-x CTRL-u` reactivates autocompletion if it's gone away
+- `CTRL-y` selects the highlighted match without triggering ENTER
 
 When you're searching for a class or module (but not yet for method searches),
 you will sometimes see a little number in parentheses to the right of a match.
@@ -87,12 +91,12 @@ definition of a "part" is; it's just something the RDoc::RI codebase knows
 about.) Please note that the relationship between the number of comment-parts
 and the length of the documentation is not exactly linear. But it's still a
 useful filter for knowing which documentation pages are worth looking up.
-    
+
 
 ### The documentation window
 
-* `,,r` invokes the class/module method autocompletion window 
-* `-` goes up from a method page to the page of the parent class or module 
+* `,,r` invokes the class/module method autocompletion window
+* `-` goes up from a method page to the page of the parent class or module
 * `CTRL-o` and `CTRL-i` jump you back and forward through the documentation pages you've visited
 
 When you find a matching method or class or module and press `ENTER`, you
@@ -122,7 +126,7 @@ Let's look at `#encode`:
 
 When you are looking at the documentation for an instance or class method, you
 can still use `,,r` to browse and jump to other methods on that same class or
-module. 
+module.
 
 You can also use `-` to jump up the hierarchy to the page for the `String`
 class. If you were in a nested class, e.g. `File::Stat`, you could also jump up
@@ -139,13 +143,14 @@ where you were before you jumped to this page. `CTRL-i` takes you back forward.
 * `,h` opens the HTML RDoc version of the gem documentation you are looking at
 
 If you are looking at documentation for a Gem, you can see the README for
-that gem (assuming it exists and is called README.*) by pressing `,g`.
+that gem (assuming it exists and is called README.\*) by pressing `,g`.
 
 If you've generated the HTML RDoc documentation for this Gem, you can open it
 in a web browser by pressing `,h`.
 
-If you're looking at a gem's README, you can change the local working directory 
+If you're looking at a gem's README, you can change the local working directory
 to the gem root directory by using the vim command `:lcd %:h`.
+
 
 ## How to generate ri documentation
 
@@ -163,7 +168,7 @@ standard library of your active Ruby installation:
     rvm docs generate-ri
 
 You can check if this worked by running a command like `ri Enumerable` or `ri
-IO` on the command line. 
+IO` on the command line.
 
 To generate ri documentation for your gems, use these commands:
 
@@ -185,12 +190,14 @@ this to your `.vimrc`:
 
     nnoremap  ,ri :call ri#OpenSearchPrompt(0)<cr> " horizontal split
     nnoremap  ,RI :call ri#OpenSearchPrompt(1)<cr> " vertical split
-    nnoremap  ,RK :call ri#LookupNameUnderCursor()<cr> " keyword lookup 
+    nnoremap  ,RK :call ri#LookupNameUnderCursor()<cr> " keyword lookup
+
 
 ## Maintainers
 
-* Matthias Günther [matthias-guenther](https://github.com/matthias-guenther)
-* Daniel Choi [danchoi](https://github.com/danchoi)
+- Matthias Günther [wikimatze](https://github.com/wikimatze)
+- Daniel Choi [danchoi](https://github.com/danchoi)
+
 
 ## Acknowledgements
 
@@ -199,11 +206,13 @@ builds on. ri.vim adds just a little piece to that very useful codebase.
 
 Thank you to [Suraj Kurapati](https://github.com/sunaku) for the tip on
 how to generate ri documention for installed gems.
+
+
 ## Bug reports and feature requests
 
 Please submit them here:
 
-* <https://github.com/danchoi/ri.vim/issues>
+- <https://github.com/danchoi/ri.vim/issues>
 
 
 ## About the developer
@@ -211,10 +220,7 @@ Please submit them here:
 My name is Daniel Choi. I specialize in Ruby, Rails, MySQL, PostgreSQL, and iOS
 development. I am based in Cambridge, Massachusetts, USA.
 
-* Twitter: [@danchoi][twitter] 
-* Personal Email: dhchoi@gmail.com  
-* My Homepage: <http://danielchoi.com/software>
-
-[twitter]:http://twitter.com/#!/danchoi
-
+- Twitter: [@danchoi](http://twitter.com/#!/danchoi)
+- Personal Email: dhchoi@gmail.com
+- My Homepage: <http://danielchoi.com/software>
 

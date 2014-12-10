@@ -30,7 +30,7 @@ Copy the contents of plugin/ into your .vim/plugin directory.
 
 ## Commands
 
-For the all the commands below, the mapleader is assumed to be `,`. If it is
+For all the commands below, the mapleader is assumed to be `,`. If it is
 `\` or something else for your setup, use that instead.
 
 
@@ -45,13 +45,13 @@ For the all the commands below, the mapleader is assumed to be `,`. If it is
 - `K` is automatically remapped to use ri.vim if the current buffer is a \*.rb
   file
 
-If these mapping clash or you don't like them, you can override some of them.
+If these mappings clash or you don't like them, you can override some of them.
 See **Changing keymappings** below.
 
 
 ### Using the search/autocomplete window
 
-Withe the search/autocomplete window open, start typing the name of the class,
+With the search/autocomplete window open, start typing the name of the class,
 module, or method you want to lookup.
 
 Press `TAB` to start autocompletion.
@@ -79,14 +79,14 @@ one.
 - `CTRL-u`: when the match list is active, cycles forward through the match
   list and what you've typed so far; when the match list is inactive, erases
   what you've typed.
-- both `TAB` and `CTRL-x CTRL-u` reactivates autocompletion if it's gone away
+- both `TAB` and `CTRL-x CTRL-u` reactivate autocompletion if it's gone away
 - `CTRL-y` selects the highlighted match without triggering ENTER
 
 When you're searching for a class or module (but not yet for method searches),
 you will sometimes see a little number in parentheses to the right of a match.
 This is a rough indicator of how much actual documentation there is to see for
 that class or module. It actually represents how many "parts" of the generated
-documentation has a "comment" associated with it. (Don't ask me what the
+documentation have a "comment" associated with them. (Don't ask me what the
 definition of a "part" is; it's just something the RDoc::RI codebase knows
 about.) Please note that the relationship between the number of comment-parts
 and the length of the documentation is not exactly linear. But it's still a
@@ -101,11 +101,11 @@ useful filter for knowing which documentation pages are worth looking up.
 
 When you find a matching method or class or module and press `ENTER`, you
 should see the ri documentation, with a light touch of color-highlighting,
-display in a Vim window.
+displayed in a Vim window.
 
 ![screenshot](https://github.com/danchoi/ri_vim/raw/master/screens/ri_doc.png)
 
-You can move to cursor to any valid Ruby method or class/module name on this
+You can move the cursor to any valid Ruby method or class/module name on this
 page (including the class and instance methods at the bottom) and press `ENTER`
 to jump to the documentation.
 
@@ -178,7 +178,7 @@ To generate ri documentation for your gems, use these commands:
     # for bundled gems
     bundle list | tr -d '*(,)' | awk '{print $1, "--version", $2}' | xargs -n3 gem rdoc --ri --no-rdoc
 
-If you like using `ri.vim`, you may want to make to remove `--no-ri` if you
+If you like using `ri.vim`, you may want to remove `--no-ri` if you
 added that to your `.gemrc`. This will make sure that the `gem install` command
 automatically generates ri documentation.
 

@@ -192,6 +192,9 @@ this to your `.vimrc`:
     nnoremap  ,RI :call ri#OpenSearchPrompt(1)<cr> " vertical split
     nnoremap  ,RK :call ri#LookupNameUnderCursor()<cr> " keyword lookup
 
+Alternatively you can also disable the default plugin mappings to set your own:
+
+    let g:ri_no_mappings=1
 
 ## Maintainers
 

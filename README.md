@@ -227,3 +227,6 @@ development. I am based in Cambridge, Massachusetts, USA.
 - Personal Email: dhchoi@gmail.com
 - My Homepage: <http://danielchoi.com/software>
 
+## License
+
+  [MIT](LICENSE)

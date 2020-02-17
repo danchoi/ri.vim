@@ -25,8 +25,14 @@ Advantages over the venerable `ri` command-line tool:
 
 ## Install
 
-Copy the contents of plugin/ into your .vim/plugin directory.
+Install using your favorite package manager, or use Vim's built-in package support:
 
+```
+mkdir -p ~/.vim/pack/danchoi/start
+cd ~/.vim/pack/danchoi/start
+git clone https://github.com/danchoi/ri.vim
+vim -u NONE -c "helptags ri/doc" -c q
+```
 
 ## Commands
 
